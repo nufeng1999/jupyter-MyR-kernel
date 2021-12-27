@@ -1,5 +1,8 @@
-# MyR kernel for Jupyter
-[Example](https://github.com/nufeng1999/jupyter-MyR-kernel/blob/master/example/jupyter_MyR_readme.ipynb "Example")
+![](https://img.shields.io/badge/Jupyter-Kernel-green?link=https://jupyter.org/&link=https://github.com/jupyter/jupyter/wiki/Jupyter-kernels) ![](https://img.shields.io/badge/MyR-Kernel-orange) ![](https://img.shields.io/github/watchers/nufeng1999/jupyter-MyR-kernel) <img alt="ViewCount" src="https://views.whatilearened.today/views/github/nufeng1999/jupyter-MyR-kernel.svg">
+    <a href="https://github.com/nufeng1999/jupyter-MyR-kernel"><img alt="GitHub Clones" src="https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://raw.githubusercontent.com/nufeng1999/jupyter-MyR-kernel/master/clone.json&logo=github"></a>
+# MyR kernel for Jupyter  
+  
+[Example](https://github.com/nufeng1999/jupyter-MyR-kernel/blob/master/example/MyR.ipynb "Example")
 * Make sure you have the following requirements installed:
   * R
   * jupyter

@@ -89,10 +89,10 @@ class MyRKernel(MyKernel):
         
 #################
 ##do_runcode
-    def do_runcode(self,return_code,fil_ename,magics,code, silent, store_history=True,
+    def do_runcode(self,return_code,file_name,magics,code, silent, store_history=True,
                     user_expressions=None, allow_stdin=True):
         return_code=return_code
-        fil_ename=fil_ename
+        file_name=file_name
         bcancel_exec=False
         retinfo=self.mymagics.get_retinfo()
         retstr=''
@@ -101,14 +101,14 @@ class MyRKernel(MyKernel):
         Rcmd=['Rscript']
         if len(options)>0:
             Rcmd+=options
-        p = self.mymagics.create_jupyter_subprocess(Rcmd+[fil_ename]+ magics['_st']['args'],cwd=None,shell=False,env=self.mymagics.addkey2dict(magics,'env'),magics=magics)
+        p = self.mymagics.create_jupyter_subprocess(Rcmd+[file_name]+ magics['_st']['args'],cwd=None,shell=False,env=self.mymagics.addkey2dict(magics,'env'),magics=magics)
         #p = self.create_jupyter_subprocess([binary_file.name]+ magics['args'],cwd=None,shell=False)
         #p = self.create_jupyter_subprocess([self.master_path, binary_file.name] + magics['args'],cwd='/tmp',shell=True)
         self.mymagics.g_rtsps[str(p.pid)]=p
         return_code=p.returncode
         ##代码启动后
-        bcancel_exec,retstr=self.mymagics.raise_plugin(code,magics,return_code,fil_ename,3,2)
-        # if bcancel_exec:return bcancel_exec,retinfo,magics, code,fil_ename,retstr
+        bcancel_exec,retstr=self.mymagics.raise_plugin(code,magics,return_code,file_name,3,2)
+        # if bcancel_exec:return bcancel_exec,retinfo,magics, code,file_name,retstr
         
         if len(self.mymagics.addkey2dict(magics,'showpid'))>0:
             self.mymagics._write_to_stdout("The process PID:"+str(p.pid)+"\n")
@@ -121,30 +121,30 @@ class MyRKernel(MyKernel):
         ##代码运行结束
         if p.returncode != 0:
             self.mymagics._log("Executable exited with code {}".format(p.returncode),2)
-        return bcancel_exec,retinfo,magics, code,fil_ename,retstr
+        return bcancel_exec,retinfo,magics, code,file_name,retstr
 ##do_compile_code
-    def do_compile_code(self,return_code,fil_ename,magics,code, silent, store_history=True,
+    def do_compile_code(self,return_code,file_name,magics,code, silent, store_history=True,
                     user_expressions=None, allow_stdin=True):
         return_code=0
-        fil_ename=fil_ename
-        sourcefilename=fil_ename
+        file_name=file_name
+        sourcefilename=file_name
         bcancel_exec=False
         retinfo=self.mymagics.get_retinfo()
         retstr=''
-        return bcancel_exec,retinfo,magics, code,fil_ename,retstr
+        return bcancel_exec,retinfo,magics, code,file_name,retstr
 ##do_create_codefile
     def do_create_codefile(self,magics,code, silent, store_history=True,
                     user_expressions=None, allow_stdin=True):
         return_code=0
-        fil_ename=''
+        file_name=''
         bcancel_exec=False
         retinfo=self.mymagics.get_retinfo()
         retstr=''
         source_file=self.mymagics.create_codetemp_file(magics,code,suffix='.r')
         newsrcfilename=source_file.name
-        fil_ename=newsrcfilename
+        file_name=newsrcfilename
         return_code=True
-        return bcancel_exec,self.mymagics.get_retinfo(),magics, code,fil_ename,retstr
+        return bcancel_exec,self.mymagics.get_retinfo(),magics, code,file_name,retstr
 ##do_preexecute
     def do_preexecute(self,code,magics,silent, store_history=True,
                 user_expressions=None, allow_stdin=False):
